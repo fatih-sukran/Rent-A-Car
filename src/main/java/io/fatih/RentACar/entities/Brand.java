@@ -9,9 +9,9 @@ import java.util.UUID;
 @Entity
 public class Brand {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private UUID id;
+    private long id;
 
     @Column(name = "name")
     private String name;
