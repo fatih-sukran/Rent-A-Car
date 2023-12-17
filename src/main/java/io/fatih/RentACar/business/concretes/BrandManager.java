@@ -20,6 +20,11 @@ public class BrandManager implements BrandService {
     }
 
     @Override
+    public Brand getById(long id) {
+        return brandRepository.getReferenceById(id);
+    }
+
+    @Override
     public void add(Brand brand) {
         brandRepository.save(brand);
     }

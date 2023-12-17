@@ -20,6 +20,11 @@ public class ModelManager implements ModelService {
     }
 
     @Override
+    public Model getById(long id) {
+        return modelRepository.getReferenceById(id);
+    }
+
+    @Override
     public void add(Model model) {
         modelRepository.save(model);
     }

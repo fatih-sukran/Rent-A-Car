@@ -20,6 +20,11 @@ public class CarManager implements CarService {
     }
 
     @Override
+    public Car getById(long id) {
+        return carRepository.getReferenceById(id);
+    }
+
+    @Override
     public void add(Car car) {
         carRepository.save(car);
     }
