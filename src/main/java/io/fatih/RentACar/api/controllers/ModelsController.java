@@ -9,6 +9,7 @@ import io.fatih.RentACar.business.responses.brands.GetAllBrandsResponse;
 import io.fatih.RentACar.business.responses.models.GetAllModelsResponse;
 import io.fatih.RentACar.entities.Brand;
 import io.fatih.RentACar.entities.Model;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,7 +45,7 @@ public class ModelsController {
     }
 
     @PostMapping("/add")
-    public String add(CreateModelRequest request) {
+    public String add(@Valid CreateModelRequest request) {
         var model = new Model();
         var brand = brandService.getById(request.getBrandId());
 

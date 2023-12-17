@@ -9,6 +9,7 @@ import io.fatih.RentACar.business.responses.cars.GetAllCarsResponse;
 import io.fatih.RentACar.business.responses.models.GetAllModelsResponse;
 import io.fatih.RentACar.entities.Car;
 import io.fatih.RentACar.entities.Model;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,7 +50,7 @@ public class CarsController {
     }
 
     @PostMapping("/add")
-    public String add(CreateCarRequest request) {
+    public String add(@Valid CreateCarRequest request) {
         var car = new Car();
         var model = modelService.getById(request.getModelId());
 
