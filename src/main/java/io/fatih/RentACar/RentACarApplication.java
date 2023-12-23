@@ -4,6 +4,7 @@ import io.fatih.RentACar.business.responses.errors.ErrorResponse;
 import io.fatih.RentACar.core.utilities.exceptions.BusinessRulesException;
 import io.fatih.RentACar.business.responses.errors.ValidationErrorResponse;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 @SpringBootApplication
+@EnableAutoConfiguration
 public class RentACarApplication {
 
     public static void main(String[] args) {
