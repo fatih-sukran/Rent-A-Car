@@ -1,6 +1,7 @@
 package io.fatih.RentACar.business.concretes;
 
 import io.fatih.RentACar.business.abstracts.CarService;
+import io.fatih.RentACar.business.rules.CarBusinessRules;
 import io.fatih.RentACar.entities.Car;
 import io.fatih.RentACar.service.CarRepository;
 import lombok.AllArgsConstructor;
@@ -13,6 +14,7 @@ import java.util.List;
 public class CarManager implements CarService {
 
     private final CarRepository carRepository;
+    private final CarBusinessRules carBusinessRules;
 
     @Override
     public List<Car> getAll() {
@@ -26,6 +28,7 @@ public class CarManager implements CarService {
 
     @Override
     public void add(Car car) {
+        carBusinessRules.checkIfCarPlateExists(car.getPlate());
         carRepository.save(car);
     }
 }

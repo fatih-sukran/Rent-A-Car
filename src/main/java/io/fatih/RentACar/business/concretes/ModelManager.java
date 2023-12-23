@@ -1,6 +1,7 @@
 package io.fatih.RentACar.business.concretes;
 
 import io.fatih.RentACar.business.abstracts.ModelService;
+import io.fatih.RentACar.business.rules.ModelBusinessRules;
 import io.fatih.RentACar.entities.Model;
 import io.fatih.RentACar.service.ModelRepository;
 import lombok.AllArgsConstructor;
@@ -13,6 +14,7 @@ import java.util.List;
 public class ModelManager implements ModelService {
 
     private final ModelRepository modelRepository;
+    private final ModelBusinessRules modelBusinessRules;
 
     @Override
     public List<Model> getAll() {
@@ -26,6 +28,7 @@ public class ModelManager implements ModelService {
 
     @Override
     public void add(Model model) {
+        modelBusinessRules.checkIfModelNameExists(model.getName());
         modelRepository.save(model);
     }
 }
