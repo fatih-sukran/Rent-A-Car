@@ -7,6 +7,7 @@ import io.fatih.RentACar.business.requests.CreateCarRequest;
 import io.fatih.RentACar.business.requests.CreateModelRequest;
 import io.fatih.RentACar.business.responses.cars.GetAllCarsResponse;
 import io.fatih.RentACar.business.responses.models.GetAllModelsResponse;
+import io.fatih.RentACar.core.utilities.mapper.CarMapper;
 import io.fatih.RentACar.entities.Car;
 import io.fatih.RentACar.entities.Model;
 import jakarta.validation.Valid;
@@ -26,6 +27,7 @@ public class CarsController {
 
     private final CarService carService;
     private final ModelService modelService;
+    private final CarMapper carMapper;
 
     @GetMapping("/getAll")
     public List<GetAllCarsResponse> getAllCars() {
@@ -33,16 +35,7 @@ public class CarsController {
         var allCarsResponses = new ArrayList<GetAllCarsResponse>();
 
         for (var car : cars) {
-            var carResponse = new GetAllCarsResponse();
-            carResponse.setId(car.getId());
-            carResponse.setPlate(car.getPlate());
-            carResponse.setModelYear(car.getModelYear());
-            carResponse.setKilometer(car.getKilometer());
-            carResponse.setAvailable(car.isAvailable());
-            carResponse.setDailyPrice(car.getDailyPrice());
-            carResponse.setBrandName(car.getModel().getBrand().getName());
-            carResponse.setModelName(car.getModel().getName());
-
+            var carResponse = carMapper.map(car);
             allCarsResponses.add(carResponse);
         }
 
@@ -51,16 +44,7 @@ public class CarsController {
 
     @PostMapping("/add")
     public String add(@Valid CreateCarRequest request) {
-        var car = new Car();
-        var model = modelService.getById(request.getModelId());
-
-        car.setPlate(request.getPlate());
-        car.setModelYear(request.getModelYear());
-        car.setKilometer(request.getKilometer());
-        car.setDailyPrice(request.getDailyPrice());
-        car.setAvailable(request.isAvailable());
-        car.setModel(model);
-
+        var car = carMapper.map(request);
         carService.add(car);
 
         return "Car added successfully";

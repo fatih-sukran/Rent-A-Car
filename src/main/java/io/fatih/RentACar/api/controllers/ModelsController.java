@@ -7,6 +7,7 @@ import io.fatih.RentACar.business.requests.CreateModelRequest;
 import io.fatih.RentACar.business.responses.BrandResponse;
 import io.fatih.RentACar.business.responses.brands.GetAllBrandsResponse;
 import io.fatih.RentACar.business.responses.models.GetAllModelsResponse;
+import io.fatih.RentACar.core.utilities.mapper.ModelMapper;
 import io.fatih.RentACar.entities.Brand;
 import io.fatih.RentACar.entities.Model;
 import jakarta.validation.Valid;
@@ -24,8 +25,9 @@ import java.util.List;
 @RestController(value = "Models Controller")
 public class ModelsController {
 
+//    private final ModelMapper modelMapper;
     private final ModelService modelService;
-    private final BrandService brandService;
+//    private final BrandService brandService;
 
     @GetMapping("/getAll")
     public List<GetAllModelsResponse> getAllModels() {
@@ -33,12 +35,8 @@ public class ModelsController {
         var allModelsResponses = new ArrayList<GetAllModelsResponse>();
 
         for (var model : models) {
-            var modelResponse = new GetAllModelsResponse();
-            modelResponse.setId(model.getId());
-            modelResponse.setName(model.getName());
-            modelResponse.setBrandName(model.getBrand().getName());
-
-            allModelsResponses.add(modelResponse);
+//            var modelResponse = modelMapper.map(model);
+//            allModelsResponses.add(modelResponse);
         }
 
         return allModelsResponses;
@@ -46,12 +44,8 @@ public class ModelsController {
 
     @PostMapping("/add")
     public String add(@Valid CreateModelRequest request) {
-        var model = new Model();
-        var brand = brandService.getById(request.getBrandId());
-
-        model.setName(request.getName());
-        model.setBrand(brand);
-        modelService.add(model);
+//        var model = modelMapper.map(request);
+//        modelService.add(model);
 
         return "Model added successfully";
     }
