@@ -1,6 +1,5 @@
 package io.fatih.RentACar.core.base;
 
-import io.fatih.RentACar.business.abstracts.BaseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;

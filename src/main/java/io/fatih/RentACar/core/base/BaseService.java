@@ -1,4 +1,4 @@
-package io.fatih.RentACar.business.abstracts;
+package io.fatih.RentACar.core.base;
 
 import java.util.List;
 
