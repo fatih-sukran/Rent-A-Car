@@ -3,6 +3,8 @@ package io.fatih.RentACar.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "models")
@@ -18,5 +20,9 @@ public class Model {
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private Brand brand;
+
+    @OneToMany(mappedBy = "model")
+    private List<Car> car;
+
 
 }

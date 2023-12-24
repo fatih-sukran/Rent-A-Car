@@ -3,7 +3,7 @@ package io.fatih.RentACar.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.UUID;
+import java.util.List;
 
 @Data
 @Entity
@@ -16,4 +16,7 @@ public class Brand {
 
     @Column(name = "name")
     private String name;
+
+    @OneToMany(mappedBy = "brand")
+    private List<Model> model;
 }
