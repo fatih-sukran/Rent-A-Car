@@ -31,4 +31,9 @@ public class CarManager implements CarService {
         carBusinessRules.checkIfCarPlateExists(car.getPlate());
         carRepository.save(car);
     }
+
+    @Override
+    public void delete(long id) {
+        carRepository.deleteById(id);
+    }
 }

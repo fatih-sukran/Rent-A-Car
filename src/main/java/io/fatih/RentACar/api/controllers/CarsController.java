@@ -4,22 +4,27 @@ import io.fatih.RentACar.business.abstracts.CarService;
 import io.fatih.RentACar.business.abstracts.ModelService;
 import io.fatih.RentACar.business.requests.CreateCarRequest;
 import io.fatih.RentACar.business.responses.cars.GetAllCarsResponse;
+import io.fatih.RentACar.core.base.BaseControllers;
 import io.fatih.RentACar.core.utilities.mapper.CarMapper;
+import io.fatih.RentACar.entities.Car;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
 @RequestMapping("/api/cars")
 @RestController(value = "Cars Controller")
-public class CarsController {
+public class CarsController extends BaseControllers<Car, CarService> {
 
     private final CarService carService;
-    private final ModelService modelService;
     private final CarMapper carMapper;
+
+    public CarsController(CarService carService, CarMapper carMapper) {
+        super(carService);
+        this.carService = carService;
+        this.carMapper = carMapper;
+    }
 
     @GetMapping("/getAll")
     public List<GetAllCarsResponse> getAllCars() {

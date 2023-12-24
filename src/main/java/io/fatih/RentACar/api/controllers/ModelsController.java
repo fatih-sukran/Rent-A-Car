@@ -3,21 +3,29 @@ package io.fatih.RentACar.api.controllers;
 import io.fatih.RentACar.business.abstracts.ModelService;
 import io.fatih.RentACar.business.requests.CreateModelRequest;
 import io.fatih.RentACar.business.responses.models.GetAllModelsResponse;
+import io.fatih.RentACar.core.base.BaseControllers;
 import io.fatih.RentACar.core.utilities.mapper.ModelMapper;
+import io.fatih.RentACar.entities.Model;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
 @RequestMapping("/api/models")
 @RestController(value = "Models Controller")
-public class ModelsController {
+public class ModelsController extends BaseControllers<Model, ModelService> {
 
-    private final ModelMapper modelMapper;
     private final ModelService modelService;
+    private final ModelMapper modelMapper;
+
+    public ModelsController(ModelService service, ModelMapper modelMapper) {
+        super(service);
+        this.modelService = service;
+        this.modelMapper = modelMapper;
+    }
 
     @GetMapping("/getAll")
     public List<GetAllModelsResponse> getAllModels() {
@@ -33,10 +41,10 @@ public class ModelsController {
     }
 
     @PostMapping("/add")
-    public String add(@Valid @RequestBody CreateModelRequest request) {
+    public ResponseEntity<String> add(@Valid @RequestBody CreateModelRequest request) {
         var model = modelMapper.map(request);
         modelService.add(model);
 
-        return "Model added successfully";
+        return new ResponseEntity<>("Model added successfully", HttpStatus.OK);
     }
 }

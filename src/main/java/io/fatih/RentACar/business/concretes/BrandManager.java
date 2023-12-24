@@ -31,4 +31,9 @@ public class BrandManager implements BrandService {
         brandBusinessRules.checkIfBrandNameExists(brand.getName());
         brandRepository.save(brand);
     }
+
+    @Override
+    public void delete(long id) {
+        brandRepository.deleteById(id);
+    }
 }

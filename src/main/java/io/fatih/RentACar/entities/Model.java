@@ -22,7 +22,7 @@ public class Model {
     private Brand brand;
 
     @OneToMany(mappedBy = "model")
-    private List<Car> car;
+    private List<Car> cars;
 
 
 }

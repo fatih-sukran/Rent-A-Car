@@ -7,4 +7,5 @@ public interface BaseService<T> {
     T getById(long id);
     void add(T t);
 
+    void delete(long id);
 }

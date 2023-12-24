@@ -31,4 +31,9 @@ public class ModelManager implements ModelService {
         modelBusinessRules.checkIfModelNameExists(model.getName());
         modelRepository.save(model);
     }
+
+    @Override
+    public void delete(long id) {
+        modelRepository.deleteById(id);
+    }
 }
