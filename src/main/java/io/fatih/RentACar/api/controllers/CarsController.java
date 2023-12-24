@@ -4,7 +4,7 @@ import io.fatih.RentACar.business.abstracts.CarService;
 import io.fatih.RentACar.business.abstracts.ModelService;
 import io.fatih.RentACar.business.requests.CreateCarRequest;
 import io.fatih.RentACar.business.responses.cars.GetAllCarsResponse;
-import io.fatih.RentACar.core.utilities.mapper.abstracts.CarMapper;
+import io.fatih.RentACar.core.utilities.mapper.CarMapper;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;

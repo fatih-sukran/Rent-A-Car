@@ -3,7 +3,7 @@ package io.fatih.RentACar.api.controllers;
 import io.fatih.RentACar.business.abstracts.ModelService;
 import io.fatih.RentACar.business.requests.CreateModelRequest;
 import io.fatih.RentACar.business.responses.models.GetAllModelsResponse;
-import io.fatih.RentACar.core.utilities.mapper.abstracts.ModelMapper;
+import io.fatih.RentACar.core.utilities.mapper.ModelMapper;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
