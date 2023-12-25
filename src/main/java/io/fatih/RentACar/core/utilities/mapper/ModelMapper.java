@@ -1,6 +1,5 @@
 package io.fatih.RentACar.core.utilities.mapper;
 
-import io.fatih.RentACar.business.abstracts.BrandService;
 import io.fatih.RentACar.business.requests.CreateModelRequest;
 import io.fatih.RentACar.business.responses.models.GetAllModelsResponse;
 import io.fatih.RentACar.entities.Model;
