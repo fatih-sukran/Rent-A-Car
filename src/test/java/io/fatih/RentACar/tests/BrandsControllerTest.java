@@ -70,4 +70,14 @@ public class BrandsControllerTest {
         Mockito.verify(brandBusinessRules).checkIfBrandNameExists(brand.getName());
         Mockito.verify(brandRepository, Mockito.never()).save(brand);
     }
+
+    @Test
+    void delete_validId() {
+        var id = 1L;
+        Mockito.doNothing().when(brandRepository).deleteById(id);
+
+        brandManager.delete(id);
+
+        Mockito.verify(brandRepository).deleteById(id);
+    }
 }
