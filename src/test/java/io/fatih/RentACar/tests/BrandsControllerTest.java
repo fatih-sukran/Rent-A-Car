@@ -13,6 +13,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,6 +26,17 @@ public class BrandsControllerTest {
     private BrandBusinessRules brandBusinessRules;
     @InjectMocks
     private BrandManager brandManager;
+
+    @Test
+    void getAll() {
+        var brand = BrandBuilder.createBrandWithId(1L);
+        Mockito.when(brandRepository.findAll()).thenReturn(List.of(brand));
+
+        var result = brandManager.getAll();
+
+        Mockito.verify(brandRepository).findAll();
+        assertThat(result).isEqualTo(List.of(brand));
+    }
 
     @Test
     void getById_validId() {
