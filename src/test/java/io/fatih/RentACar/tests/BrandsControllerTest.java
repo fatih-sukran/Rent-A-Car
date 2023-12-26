@@ -2,7 +2,6 @@ package io.fatih.RentACar.tests;
 
 import io.fatih.RentACar.business.concretes.BrandManager;
 import io.fatih.RentACar.business.rules.BrandBusinessRules;
-import io.fatih.RentACar.entities.Brand;
 import io.fatih.RentACar.service.BrandRepository;
 import io.fatih.RentACar.tests.databuilder.BrandBuilder;
 import jakarta.persistence.EntityNotFoundException;
@@ -46,5 +45,17 @@ public class BrandsControllerTest {
 
         assertThrows(EntityNotFoundException.class, () -> brandManager.getById(id));
         Mockito.verify(brandRepository).getReferenceById(id);
+    }
+
+    @Test
+    void add_validBrand() {
+        var brand = BrandBuilder.createBrandWithId(1L);
+
+        Mockito.when(brandRepository.save(brand)).thenReturn(brand);
+
+        brandManager.add(brand);
+
+        Mockito.verify(brandRepository).save(brand);
+        Mockito.verify(brandBusinessRules).checkIfBrandNameExists(brand.getName());
     }
 }
