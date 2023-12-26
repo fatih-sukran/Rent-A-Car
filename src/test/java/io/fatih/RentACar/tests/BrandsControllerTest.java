@@ -4,6 +4,8 @@ import io.fatih.RentACar.business.concretes.BrandManager;
 import io.fatih.RentACar.business.rules.BrandBusinessRules;
 import io.fatih.RentACar.entities.Brand;
 import io.fatih.RentACar.service.BrandRepository;
+import io.fatih.RentACar.tests.databuilder.BrandBuilder;
+import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -11,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
@@ -23,11 +26,9 @@ public class BrandsControllerTest {
     private BrandManager brandManager;
 
     @Test
-    void getAllBrands_ReturnsAllBrands() {
+    void getById_validId() {
         var id = 1L;
-        var brand = new Brand();
-        brand.setId(id);
-        brand.setName("Test Brand");
+        var brand = BrandBuilder.createBrandWithId(id);
 
         Mockito.when(brandRepository.getReferenceById(id)).thenReturn(brand);
 
@@ -35,5 +36,15 @@ public class BrandsControllerTest {
         Mockito.verify(brandRepository).getReferenceById(id);
 
         assertThat(result).isEqualTo(brand);
+    }
+
+    @Test
+    void getById_invalidId() {
+        var id = -1L;
+
+        Mockito.when(brandRepository.getReferenceById(id)).thenThrow(EntityNotFoundException.class);
+
+        assertThrows(EntityNotFoundException.class, () -> brandManager.getById(id));
+        Mockito.verify(brandRepository).getReferenceById(id);
     }
 }
