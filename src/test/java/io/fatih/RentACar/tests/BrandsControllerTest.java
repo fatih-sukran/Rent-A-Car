@@ -80,4 +80,15 @@ public class BrandsControllerTest {
 
         Mockito.verify(brandRepository).deleteById(id);
     }
+
+    @Test
+    void delete_invalidId() {
+        var id = -1L;
+        Mockito.doThrow(IllegalArgumentException.class).when(brandRepository).deleteById(id);
+
+        assertThrows(IllegalArgumentException.class, () -> brandManager.delete(id));
+
+        Mockito.verify(brandRepository).deleteById(id);
+    }
+
 }
